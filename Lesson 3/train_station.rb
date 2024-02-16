@@ -43,11 +43,13 @@ class Route
 
   def add_station(add_station)
     @transit_stations << add_station
+    @all_stations = [@@start_station, @transit_stations, @@last_station].flatten
   end
 
   def del_station(del_station)
     if @transit_stations.include?(del_station)
       @transit_stations.delete(del_station)
+      @all_stations = [@@start_station, @transit_stations, @@last_station].flatten
     else
       puts "Станции нет в маршруте, данное действие невозможно выполнить"
     end
@@ -103,8 +105,8 @@ class Train
   end
 
   def wagons_number
-    if @wagons_number > 0
-    puts "К поезду прицеплено #{@wagons} вагонов"
+    if @wagons_number > 0 
+    puts "К поезду прицеплен(-о) #{@wagons_number} вагон(-a,-ов)"
     else
     puts "К поездку не прицеплены вагоны"
     end
