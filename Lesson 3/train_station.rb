@@ -1,7 +1,7 @@
 class Station
   def initialize(station_name)
      @station_name = station_name
-     @station_trains = []
+     @station_trains = [] 
   end
 
   def accept_train(train)
@@ -51,6 +51,7 @@ class Route
     else
       puts "Станции нет в маршруте, данное действие невозможно выполнить"
     end
+  end
   
   def stations_list
     puts @all_stations
@@ -117,6 +118,7 @@ class Train
     else
       puts "Вы можете выбрать маршрут из списка существующих или создать новый"
     end
+  end
 
   def next_station
     @all_stations.each do |x|
@@ -148,7 +150,7 @@ class Train
     elsif @current_station == @all_station[-1]
       puts "Поезд находится на конечной станции - #{@current_station}, предыдущая станция - #{@current_station.previous_station}"
     else
-      puts "Поезд находится на станции #{@current_station}, предыдщая станция - #{@current_station.previous_station}, следующая станция - #{@current_station.next_station}"
+      puts "Поезд находится на станции #{@current_station}, предыдущая станция - #{@current_station.previous_station}, следующая станция - #{@current_station.next_station}"
     end
   end
 end
