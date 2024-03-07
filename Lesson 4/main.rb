@@ -9,15 +9,15 @@ require_relative 'wagon_passenger.rb'
 
 class UserConsole
   #здесь написана консоль и методы взаимодействия с ней пользователя, поэтому оставляю их в public
-  MENU = { 'Создать станцию': create_station,
-           'Создать поезд': create_train,
-           'Создать маршрут и управлять станции в нём (добавлять или удалять)': create_route,
-           'Назначить маршрут поезду': assign_route,
-           'Добавить вагоны к поезду': hitch_wagons,
-           'Отцепить вагоны от поезда': unhitch_wagons,
-           'Переместить поезд по маршруту вперёд или назад': move_train,
-           'Посмотреть список станций и поездов на станции': stations_and_trains_list,
-           'Выход': exit }
+  MENU = { 'Создать станцию': 'create_station',
+           'Создать поезд': 'create_train',
+           'Создать маршрут и управлять им': 'create_route',
+           'Назначить маршрут поезду': 'assign_route',
+           'Добавить вагоны к поезду': 'hitch_wagons',
+           'Отцепить вагоны от поезда': 'unhitch_wagons',
+           'Переместить поезд по маршруту': 'move_train',
+           'Посмотреть список станций и поездов на станции': 'stations_and_trains_list',
+           'Выход': 'exit' }
 
   def initialize
     @stations = []
@@ -26,13 +26,15 @@ class UserConsole
   end
 
   def menu
-    MENU.each_with_index { |name, key| puts "#{index}. #{name}" }
+    MENU.each_with_index { |(name, key), index| puts "#{index}. #{name}" }
     choose = gets.chomp.to_i
-    send(MENU.key(choose))
+    send(MENU.values[choose])
   end
 
   private
   #здесь написаны методы класса UserConsole, с которыми пользователю взаимодействовать не надо
+  attr_reader :stations, :trains, :routes
+
   def create_station
     puts 'Введите название станции:'
     name = gets.chomp
@@ -104,6 +106,7 @@ class UserConsole
     trains_list
     choose = gets.chomp.to_i
     trains[choose]
+    menu
   end
 
   def choose_station
@@ -125,7 +128,7 @@ class UserConsole
 
   def add_station_in_route(route)
     puts "Введите название добавляемой станции:"
-    route.stations.each_with_index { |station| puts "#{index}. #{station.name}" }
+    route.stations.each_with_index(station, index) { |station, index| puts "#{index}. #{station.name}" }
     choose = gets.chomp.to_i
     route.add_station(stations[choose])
   end
@@ -143,17 +146,17 @@ class UserConsole
     stations_list
     choose = gets.chomp.to_i
     station = stations[choose]
-    station.trains.each_with_index { |train| puts "#{index}. #{train.number}" }
+    station.trains.each_with_index { |train, index| puts "#{index}. #{train.number}" }
   end
 
   def stations_list
-    stations.each_with_index { |station| puts "#{index}. #{station.name}"}
+    stations.each_with_index { |station, index| puts "#{index}. #{station.name}"}
   end
   def routes_list
-    routes.each_with_index { |route| puts "#{index}. #{route.stations}" }
+    routes.each_with_index { |route, index| puts "#{index}. #{route.stations}" }
   end
 
   def trains_list
-    trains.each_with_index { |train| puts "#{index}. #{train.number}" }
+    trains.each_with_index { |train, index| puts "#{index}. #{train.number}" }
   end
 end
