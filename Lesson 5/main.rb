@@ -6,6 +6,8 @@ require_relative 'train_passenger.rb'
 require_relative 'wagon.rb'
 require_relative 'wagon_cargo.rb'
 require_relative 'wagon_passenger.rb'
+require_relative 'brand.rb'
+require_relative 'instance_counter.rb'
 
 class UserConsole
   #здесь написана консоль и методы взаимодействия с ней пользователя, поэтому оставляю их в public
