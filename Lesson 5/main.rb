@@ -34,7 +34,6 @@ class UserConsole
   end
 
   private
-  #здесь написаны методы класса UserConsole, с которыми пользователю взаимодействовать не надо
   attr_reader :stations, :trains, :routes
 
   def create_station
@@ -122,9 +121,9 @@ class UserConsole
     puts "0 - переместить на следующую станцию, 1 - на предыдущую станцию"
     choose = gets.chomp.to_i
     if choose == 0
-      add_station_in_route(route)
+      train.go_next_station
     elsif choose == 1
-      delete_station_from_route(route)
+      train.go_previous_station
     end
   end
 

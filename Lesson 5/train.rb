@@ -4,18 +4,21 @@ class Train
   attr_reader :wagons, :route, :current_station_index, :number
   attr_accessor :speed
 
-  @@trains = []
+  @@all = []
+
+  def self.all
+    all
+  end
   
   def self.find(number)
-    trains.find {|train| train.name == name}
-    
+    all.find {|train| train.number == name}
   end
 
   def initialize(number)
     @number = number
     @speed = 0
     @wagons = []
-    trains << self
+    all << self
     register_instance
   end
 

@@ -1,4 +1,5 @@
 class CargoTrain < Train
+  include  InstanceCounter
   attr_reader :type
 
   def initialize(number)
