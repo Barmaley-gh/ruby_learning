@@ -1,3 +1,6 @@
+require_relative 'instance_counter.rb'
+require_relative 'brand.rb'
+
 class Train
   include Brand
   include InstanceCounter

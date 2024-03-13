@@ -1,3 +1,5 @@
+require_relative 'instance_counter.rb'
+
 class PassengerTrain < Train
   include  InstanceCounter
   attr_accessor :type
