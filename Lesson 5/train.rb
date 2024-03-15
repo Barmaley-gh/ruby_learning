@@ -21,7 +21,7 @@ class Train
     @number = number
     @speed = 0
     @wagons = []
-    all << self
+    @@all << self
     register_instance
   end
 

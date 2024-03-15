@@ -11,10 +11,6 @@ module InstanceCounter
   module InstanceMethods
     private
     
-    def initialize
-      register_instance
-    end
-    
     def register_instance
       self.class.instances = (self.class.instances || 0) + 1
     end
