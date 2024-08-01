@@ -1,11 +1,11 @@
 puts "Укажите длину первой стороны треугольника"
-  a = gets.chomp.to_i
+a = gets.chomp.to_i
 
 puts "Укажите длину второй стороны треугольника"
-  b = gets.chomp.to_i
+b = gets.chomp.to_i
 
 puts "Укажите длину третьей стороны треугольника"
-  c = gets.chomp.to_i
+c = gets.chomp.to_i
 
 hypotenuse = [a, b, c].max
 katets_sqr_sum = [a, b, c].min(2).map { |k| k * k }.sum
