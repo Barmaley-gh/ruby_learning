@@ -53,6 +53,7 @@ class UserConsole
       puts 'Введите номер поезда:'
       number = gets.chomp
       trains << PassengerTrain.new(number)
+    end
     rescue StandartError => e
       puts e
       retry
