@@ -1,14 +1,11 @@
-require_relative 'station.rb'
-require_relative 'route.rb'
-require_relative 'train.rb'
-require_relative 'train_cargo.rb'
-require_relative 'train_passenger.rb'
-require_relative 'wagon.rb'
-require_relative 'wagon_cargo.rb'
-require_relative 'wagon_passenger.rb'
+require_relative 'station'
+require_relative 'route'
+require_relative 'train_cargo'
+require_relative 'train_passenger'
+require_relative 'wagon_cargo'
+require_relative 'wagon_passenger'
 
 class UserConsole
-  #здесь написана консоль и методы взаимодействия с ней пользователя, поэтому оставляю их в public
   MENU = { 'Создать станцию': 'create_station',
            'Создать поезд': 'create_train',
            'Создать маршрут и управлять им': 'create_route',
@@ -23,6 +20,7 @@ class UserConsole
     @stations = []
     @trains = []
     @routes = []
+    menu
   end
 
   def menu
@@ -54,8 +52,8 @@ class UserConsole
       number = gets.chomp
       trains << PassengerTrain.new(number)
     end
-    rescue StandartError => e
-      puts e
+    rescue RuntimeError
+      puts "Неправильный формат номера поезда, попробуйте ещё раз"
       retry
     end
     puts "Поезд с номером #{number} создан"
@@ -90,7 +88,7 @@ class UserConsole
   def hitch_wagons
     train = choose_train
     puts "Сколько вагонов прицепляете?"
-    quantity = gets.chomp.to_i
+    self.quantity = gets.chomp.to_i
     if train.type == 'cargo'
       train.hitch_wagon(CargoWagon.new)
     elsif train.type == 'passenger'
@@ -173,3 +171,5 @@ class UserConsole
     trains.each_with_index { |train, index| puts "#{index}. #{train.number}" }
   end
 end
+
+console = UserConsole.new

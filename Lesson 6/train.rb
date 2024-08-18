@@ -1,11 +1,9 @@
-require_relative 'instance_counter.rb'
-require_relative 'brand.rb'
-require_relative 'validation.rb'
+require_relative 'instance_counter'
+require_relative 'brand'
 
 class Train
   include Brand
   include InstanceCounter
-  include Validation
   attr_reader :wagons, :route, :current_station_index, :number
   attr_accessor :speed
 
@@ -22,16 +20,15 @@ class Train
   end
 
   def initialize(number)
+    validate!(number)
     @number = number
-    validate!
     @speed = 0
     @wagons = []
     @@all << self
-    register_instance
   end
 
   def stop
-    speed = 0
+    self.speed = 0
   end
 
   def hitch_wagon(wagon)
@@ -69,5 +66,18 @@ class Train
 
   def go_previous_station
     @current_station_index -= 1 if previous_station
+  end
+
+  def valid?
+    validate!(number)
+    true
+  rescue RuntimeError
+    false
+  end
+
+  protected
+
+  def validate!(number)
+    raise 'Неправильный формат номера поезда' if number !~ NUMBER_FORMAT
   end
 end

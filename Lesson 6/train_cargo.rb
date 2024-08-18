@@ -1,7 +1,6 @@
-require_relative 'instance_counter.rb'
+require_relative 'train'
 
 class CargoTrain < Train
-  include  InstanceCounter
   attr_reader :type
 
   def initialize(number)

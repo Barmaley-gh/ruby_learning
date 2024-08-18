@@ -1,18 +1,16 @@
-require_relative 'instance_counter.rb'
-require_relative 'validation.rb'
+require_relative 'instance_counter'
 
 class Station
   include InstanceCounter
-  include Validation
   attr_reader :trains, :name
 
   @@all = []
   
   def initialize(name)
+    validate!(name)
     @name = name
     @trains = []
     @@all << self
-    register_instance
   end
 
   def self.all
@@ -29,5 +27,18 @@ class Station
   
   def trains_by_type(type)
     trains.select { |train| train.type == type }
+  end
+
+  def valid?
+    validate!(name)
+    true
+  rescue RuntimeError
+    false
+  end
+
+  private
+
+  def validate!(name)
+    raise 'Название не может быть пустым' if name.nil? || name.empty?
   end
 end
