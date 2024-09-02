@@ -1,6 +1,6 @@
-require_relative 'wagon'
+require_relative 'carriage'
 
-class PassengerWagon < Wagon
+class PassengerCarriage < Carriage
   attr_reader :total_seats_count
 
   def initialize(seats)
@@ -14,6 +14,7 @@ class PassengerWagon < Wagon
   def take_seat
     first_empty_seat_index = @seats.find_index(false)
     raise ArgumentError, 'Все места заняты' unless first_empty_seat_index
+
     @seats[first_empty_seat_index] = true
   end
 

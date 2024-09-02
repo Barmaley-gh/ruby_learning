@@ -1,6 +1,6 @@
-require_relative 'wagon'
+require_relative 'carriage'
 
-class CargoWagon < Wagon
+class CargoCarriage < Carriage
   attr_reader :volume, :empty_volume
 
   def initialize(volume)
@@ -14,12 +14,13 @@ class CargoWagon < Wagon
   def take_volume(volume)
     if volume > empty_volume
       raise ArgumentError,
-        "Указанный объём #{volume} превышает свободный объём вагона #{empty_volume}"
+            "Указнный объём #{volume} превышает свободный объём вагона #{empty_volume}"
     end
-    self.empty_volume -= volume
+
+    @empty_volume -= volume
   end
 
   def taken_volume
-    self.volume = empty_volume
+    @volume - @empty_volume
   end
 end

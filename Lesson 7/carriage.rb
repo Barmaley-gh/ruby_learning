@@ -1,6 +1,6 @@
-require_relative 'brand'
+require_relative('brand')
 
-class Wagon
+class Carriage
   include Brand
   attr_reader :type
 
