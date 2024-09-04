@@ -243,5 +243,3 @@ class Railroad
     gets.chomp
   end
 end
-
-userconsole = Railroad.new
