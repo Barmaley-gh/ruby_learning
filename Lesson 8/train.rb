@@ -8,10 +8,10 @@ class Train
 
   NUMBER_FORMAT = /^[a-zа-я0-9]{3}-*[a-zа-я0-9]{2}$/i.freeze
 
-  @@all = []
+  @all = []
 
   def self.find(number)
-    @@all.find { |train| train.number == number }
+    @all.find { |train| train.number == number }
   end
 
   def initialize(number)
@@ -19,7 +19,7 @@ class Train
     @number = number
     @speed = 0
     @carriages = []
-    @@all << self
+    @all << self
   end
 
   def speed_up(speed)
